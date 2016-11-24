@@ -38,4 +38,9 @@ public abstract class BaseMvpFragment<P extends BaseContract.Presenter, VM exten
 
         mPresenter.start();
     }
+
+    @Override
+    public void closeScreen() {
+        getActivity().finish();
+    }
 }

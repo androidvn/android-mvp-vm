@@ -6,6 +6,8 @@ public interface BaseContract {
 
     interface View<P extends Presenter, VM extends ViewModel> {
 
+        void closeScreen();
+
         void setPresenter(P presenter);
 
         void setViewModel(VM viewModel);
