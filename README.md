@@ -1,10 +1,10 @@
-# Android MVP Architecture
+# Android MVP-VM Architecture
 
 ### Summary
 
 This library contains a <b>Presentation Layer</b> implementing the MVP-VM pattern.
 
-MVP-VM improves the [MVP Pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter) by adding a ViewModel whose only responsibility is to bind the model to the view and gather the input from the view to deliber it back to the presenter whenever it is needed.
+MVP-VM improves the [MVP Pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter) by adding a ViewModel whose only responsibility is to bind model data to the view and gather input from the view to deliver it back to the presenter whenever it is needed.
 
 In <b>android-mvp-vm</b> I implement the ViewModel <-> View interaction with the help of [Android Data Binding Library](https://developer.android.com/topic/libraries/data-binding/index.html).
 
