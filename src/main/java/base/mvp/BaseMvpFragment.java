@@ -27,16 +27,33 @@ public abstract class BaseMvpFragment<P extends BaseContract.Presenter, VM exten
     @Override
     public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mBinding = inflateDataBinding(inflater, container);
+        mBinding.setVariable(base.mvp.BR.presenter, mPresenter);
+        mBinding.setVariable(base.mvp.BR.viewModel, mViewModel);
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.start();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mBinding.setVariable(base.mvp.BR.presenter, mPresenter);
-        mBinding.setVariable(base.mvp.BR.viewModel, mViewModel);
+        mPresenter.resume();
+    }
 
-        mPresenter.start();
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.pause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onPause();
+        mPresenter.stop();
     }
 
     @Override

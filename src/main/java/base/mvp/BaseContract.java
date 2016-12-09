@@ -18,6 +18,12 @@ public interface BaseContract {
 
         void start();
 
+        void resume();
+
+        void pause();
+
+        void stop();
+
     }
 
     interface ViewModel extends Observable {
