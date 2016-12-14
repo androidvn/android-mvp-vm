@@ -26,7 +26,5 @@ public interface BaseContract {
 
     interface ViewModel extends Observable {
 
-        boolean isLoading();
-
     }
 }
