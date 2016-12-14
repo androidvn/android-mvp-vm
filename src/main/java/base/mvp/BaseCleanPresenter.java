@@ -1,18 +1,11 @@
 package base.mvp;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import base.domain.*;
-import base.domain.BuildConfig;
+import base.domain.UseCaseExecutor;
 
-public abstract class BaseCleanPresenter<V extends BaseContract.View, VM extends BaseContract.ViewModel> implements BaseContract.Presenter<V, VM> {
+public abstract class BaseCleanPresenter<V extends BaseContract.View, VM extends BaseContract.ViewModel> extends BasePresenter<V, VM> {
 
-    private static final String TAG = BaseCleanPresenter.class.getSimpleName();
-    @NonNull
-    protected final V mView;
-    @NonNull
-    protected final VM mViewModel;
     @NonNull
     protected final UseCaseExecutor mUseCaseExecutor;
 
@@ -20,36 +13,7 @@ public abstract class BaseCleanPresenter<V extends BaseContract.View, VM extends
             @NonNull V view,
             @NonNull VM viewModel,
             @NonNull UseCaseExecutor useCaseExecutor) {
-        mView = view;
-        mViewModel = viewModel;
+        super(view, viewModel);
         mUseCaseExecutor = useCaseExecutor;
-    }
-
-    @Override
-    public void start() {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "started: " + this.getClass().getSimpleName());
-        }
-    }
-
-    @Override
-    public void resume() {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "resumed: " + this.getClass().getSimpleName());
-        }
-    }
-
-    @Override
-    public void pause() {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "paused: " + this.getClass().getSimpleName());
-        }
-    }
-
-    @Override
-    public void stop() {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "stopped: " + this.getClass().getSimpleName());
-        }
     }
 }
