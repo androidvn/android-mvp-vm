@@ -52,7 +52,7 @@ public abstract class BaseMvpFragment<P extends BaseContract.Presenter, VM exten
 
     @Override
     public void onStop() {
-        super.onPause();
+        super.onStop();
         mPresenter.stop();
     }
 
