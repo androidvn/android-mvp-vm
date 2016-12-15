@@ -39,5 +39,7 @@ dependencies {
 
     compile project (':android-clean')
 
+    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+
     testCompile 'junit:junit:4.12'
 }
