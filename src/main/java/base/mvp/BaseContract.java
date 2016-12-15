@@ -12,7 +12,7 @@ public interface BaseContract {
 
     }
 
-    interface Presenter<V extends View, VM extends ViewModel> {
+    interface Presenter {
 
         void start();
 

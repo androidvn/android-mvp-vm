@@ -5,7 +5,7 @@ import android.util.Log;
 
 import base.domain.BuildConfig;
 
-public abstract class BasePresenter<V extends BaseContract.View, VM extends BaseContract.ViewModel> implements BaseContract.Presenter<V, VM> {
+public abstract class BasePresenter<V extends BaseContract.View, VM extends BaseContract.ViewModel> implements BaseContract.Presenter {
 
     private static final String TAG = BasePresenter.class.getSimpleName();
     @NonNull
