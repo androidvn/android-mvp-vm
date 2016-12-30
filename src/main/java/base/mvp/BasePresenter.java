@@ -21,28 +21,28 @@ public abstract class BasePresenter<V extends BaseContract.View, VM extends Base
     @Override
     public void start() {
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, "started: " + this.getClass().getSimpleName());
+            Log.d(TAG, "started: " + this.getClass().getSimpleName() + "@" + this.hashCode());
         }
     }
 
     @Override
     public void resume() {
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, "resumed: " + this.getClass().getSimpleName());
+            Log.d(TAG, "resumed: " + this.getClass().getSimpleName() + "@" + this.hashCode());
         }
     }
 
     @Override
     public void pause() {
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, "paused: " + this.getClass().getSimpleName());
+            Log.d(TAG, "paused: " + this.getClass().getSimpleName() + "@" + this.hashCode());
         }
     }
 
     @Override
     public void stop() {
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, "stopped: " + this.getClass().getSimpleName());
+            Log.d(TAG, "stopped: " + this.getClass().getSimpleName() + "@" + this.hashCode());
         }
     }
 }
