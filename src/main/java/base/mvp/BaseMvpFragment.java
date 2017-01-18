@@ -29,6 +29,7 @@ public abstract class BaseMvpFragment<P extends BaseContract.Presenter, VM exten
         mBinding = inflateDataBinding(inflater, container);
         mBinding.setVariable(base.mvp.BR.presenter, mPresenter);
         mBinding.setVariable(base.mvp.BR.viewModel, mViewModel);
+        mBinding.executePendingBindings();
         return mBinding.getRoot();
     }
 
