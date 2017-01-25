@@ -3,18 +3,13 @@ package base.mvp;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-public abstract class BasePresenter<V extends BaseContract.View, VM extends BaseContract.ViewModel> implements BaseContract.Presenter {
+public abstract class BasePresenter<VM extends BaseContract.ViewModel> implements BaseContract.Presenter {
 
     private static final String TAG = BasePresenter.class.getSimpleName();
     @NonNull
-    protected final V mView;
-    @NonNull
     protected final VM mViewModel;
 
-    protected BasePresenter(
-            @NonNull V view,
-            @NonNull VM viewModel) {
-        mView = view;
+    protected BasePresenter(@NonNull VM viewModel) {
         mViewModel = viewModel;
     }
 
