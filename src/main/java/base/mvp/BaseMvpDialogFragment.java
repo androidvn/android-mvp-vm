@@ -1,8 +1,8 @@
 package base.mvp;
 
-import android.app.DialogFragment;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -27,8 +27,8 @@ public abstract class BaseMvpDialogFragment<P extends BaseContract.Presenter, VM
     @Override
     public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mBinding = inflateDataBinding(inflater, container);
-        mBinding.setVariable(BR.presenter, mPresenter);
-        mBinding.setVariable(BR.viewModel, mViewModel);
+        mBinding.setVariable(base.mvp.BR.presenter, mPresenter);
+        mBinding.setVariable(base.mvp.BR.viewModel, mViewModel);
         mBinding.executePendingBindings();
         return mBinding.getRoot();
     }
