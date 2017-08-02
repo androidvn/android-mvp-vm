@@ -2,12 +2,8 @@ package base.mvp;
 
 import android.content.Context;
 import android.databinding.ViewDataBinding;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 public abstract class BaseMvpLayout<P, VM extends BaseContract.ViewModel, VDB extends ViewDataBinding> {
 
