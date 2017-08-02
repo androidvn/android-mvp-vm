@@ -19,8 +19,8 @@ public abstract class BaseMvpLayout<P, VM extends BaseContract.ViewModel, VDB ex
         mPresenter = presenter;
         mViewModel = viewModel;
 
-        mBinding.setVariable(BR.presenter, this.mPresenter);
-        mBinding.setVariable(BR.viewModel, this.mViewModel);
+        mBinding.setVariable(base.mvp.BR.presenter, this.mPresenter);
+        mBinding.setVariable(base.mvp.BR.viewModel, this.mViewModel);
         mBinding.executePendingBindings();
     }
 
