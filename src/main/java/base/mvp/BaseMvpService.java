@@ -4,11 +4,14 @@ import android.app.Service;
 import android.content.Intent;
 import android.databinding.ViewDataBinding;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Toast;
+import android.widget.FrameLayout;
 
 public abstract class BaseMvpService <P extends BaseContract.Presenter, VM extends BaseContract.ViewModel, VDB extends ViewDataBinding> extends Service implements BaseContract.View<P, VM>  {
 
@@ -34,18 +37,28 @@ public abstract class BaseMvpService <P extends BaseContract.Presenter, VM exten
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "Started Overlay", Toast.LENGTH_SHORT).show();
+        int LAYOUT_FLAG;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        } else {
+            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
+        }
 
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
-                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                LAYOUT_FLAG,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
         setupParams(params);
 
-        mBinding = inflateView((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE));
+        ViewGroup container = createContainer();
 
-        mBinding.setVariable(BR.presenter, mPresenter);
-        mBinding.setVariable(BR.viewModel, mViewModel);
+        mBinding = inflateView(
+                (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE),
+                container
+        );
+        mBinding.setVariable(base.mvp.BR.presenter, mPresenter);
+        mBinding.setVariable(base.mvp.BR.viewModel, mViewModel);
+        mBinding.executePendingBindings();
 
         WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         windowManager.addView(mBinding.getRoot(), params);
@@ -53,9 +66,21 @@ public abstract class BaseMvpService <P extends BaseContract.Presenter, VM exten
         return START_STICKY;
     }
 
-    protected void setupParams(WindowManager.LayoutParams params) {
-
+    public ViewGroup createContainer() {
+        return new FrameLayout(this);
     }
 
-    protected abstract VDB inflateView(LayoutInflater layoutInflater);
+    @Override
+    public void onDestroy() {
+
+        super.onDestroy();
+    }
+
+    protected void setupParams(WindowManager.LayoutParams params) {
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.gravity = Gravity.TOP;
+    }
+
+    protected abstract VDB inflateView(LayoutInflater layoutInflater, ViewGroup container);
 }
