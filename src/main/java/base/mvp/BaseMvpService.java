@@ -37,6 +37,7 @@ public abstract class BaseMvpService <P extends BaseContract.Presenter, VM exten
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        setupView(intent);
         int LAYOUT_FLAG;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
@@ -63,6 +64,7 @@ public abstract class BaseMvpService <P extends BaseContract.Presenter, VM exten
         WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         windowManager.addView(mBinding.getRoot(), params);
 
+        mPresenter.start();
         return START_STICKY;
     }
 
@@ -72,7 +74,9 @@ public abstract class BaseMvpService <P extends BaseContract.Presenter, VM exten
 
     @Override
     public void onDestroy() {
-
+        mPresenter.stop();
+        WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        windowManager.removeViewImmediate(mBinding.getRoot());
         super.onDestroy();
     }
 
@@ -81,6 +85,8 @@ public abstract class BaseMvpService <P extends BaseContract.Presenter, VM exten
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
         params.gravity = Gravity.TOP;
     }
+
+    public abstract void setupView(Intent intent);
 
     protected abstract VDB inflateView(LayoutInflater layoutInflater, ViewGroup container);
 }
