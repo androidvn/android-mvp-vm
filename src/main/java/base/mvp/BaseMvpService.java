@@ -65,7 +65,7 @@ public abstract class BaseMvpService <P extends BaseContract.Presenter, VM exten
         windowManager.addView(mBinding.getRoot(), params);
 
         mPresenter.start();
-        return START_STICKY;
+        return START_REDELIVER_INTENT;
     }
 
     public ViewGroup createContainer() {
