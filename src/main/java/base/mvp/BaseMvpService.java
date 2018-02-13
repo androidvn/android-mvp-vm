@@ -37,6 +37,7 @@ public abstract class BaseMvpService <P extends BaseContract.Presenter, VM exten
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (mBinding != null) return START_REDELIVER_INTENT;
         setupView(intent);
         int LAYOUT_FLAG;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -77,6 +78,7 @@ public abstract class BaseMvpService <P extends BaseContract.Presenter, VM exten
         mPresenter.stop();
         WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         windowManager.removeViewImmediate(mBinding.getRoot());
+        mBinding = null;
         super.onDestroy();
     }
 
