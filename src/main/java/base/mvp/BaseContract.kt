@@ -18,6 +18,6 @@ interface BaseContract {
 
     interface ViewModel : Observable {
 
-        fun onPropertyChanged(propertyId: Int, action: Runnable)
+        fun onPropertyChanged(propertyId: Int, action: () -> Unit)
     }
 }

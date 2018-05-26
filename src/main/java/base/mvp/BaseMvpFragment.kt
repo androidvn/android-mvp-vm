@@ -26,7 +26,7 @@ abstract class BaseMvpFragment<P : BaseContract.Presenter, VM : BaseContract.Vie
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): android.view.View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): android.view.View? {
         binding = inflateDataBinding(inflater, container)
         binding?.setVariable(base.mvp.BR.presenter, presenter)
         binding?.setVariable(base.mvp.BR.viewModel, viewModel)
@@ -39,7 +39,7 @@ abstract class BaseMvpFragment<P : BaseContract.Presenter, VM : BaseContract.Vie
         super.onDestroyView()
     }
 
-    protected abstract fun inflateDataBinding(inflater: LayoutInflater?, container: ViewGroup?): VDB
+    protected abstract fun inflateDataBinding(inflater: LayoutInflater, container: ViewGroup?): VDB
 
     override fun onStart() {
         super.onStart()

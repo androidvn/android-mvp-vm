@@ -8,7 +8,7 @@ import java.util.*
 
 open class BaseViewModel(protected val mContext: Context) : BaseObservable(), BaseContract.ViewModel {
 
-    private val mOnChangeObservers = SparseArray<MutableList<Runnable>>()
+    private val mOnChangeObservers = SparseArray<MutableList<() -> Unit>>()
 
 
     init {
@@ -16,17 +16,17 @@ open class BaseViewModel(protected val mContext: Context) : BaseObservable(), Ba
             override fun onPropertyChanged(sender: Observable, propertyId: Int) {
 
                 if (mOnChangeObservers[propertyId] != null) {
-                    mOnChangeObservers[propertyId].forEach { it.run() }
+                    mOnChangeObservers[propertyId].forEach { it.invoke() }
                 }
             }
         })
     }
 
-    override fun onPropertyChanged(propertyId: Int, action: Runnable) {
+    override fun onPropertyChanged(propertyId: Int, action: () -> Unit) {
         if (mOnChangeObservers[propertyId] != null) {
             mOnChangeObservers[propertyId].add(action)
         } else {
-            val observers = ArrayList<Runnable>()
+            val observers = ArrayList<() -> Unit>()
             observers.add(action)
             mOnChangeObservers.put(propertyId, observers)
         }
