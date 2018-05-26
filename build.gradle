@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -18,11 +21,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        releaseDEBUG {}
-        internalProductionQA {}
-        staging {}
-        internalQA {}
-        debug {}
     }
 
     dataBinding {
@@ -50,12 +48,12 @@ dependencies {
     api "com.google.dagger:dagger-android-support:$rootProject.daggerVersion" // if you use the support libraries
 
     //Dagger if JAVA
-    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+//    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+//    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
 
     //Dagger if kapt - KOTLIN
-//    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-//    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
 
     testImplementation 'junit:junit:4.12'
 }
