@@ -1,28 +1,45 @@
 package base.mvp;
 
-import android.app.Fragment;
+import android.content.Context;
 import android.databinding.ViewDataBinding;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-public abstract class BaseMvpFragment<P extends BaseContract.Presenter, VM extends BaseContract.ViewModel, VDB extends ViewDataBinding> extends Fragment implements BaseContract.View<P, VM> {
+import javax.inject.Inject;
+
+import dagger.android.support.AndroidSupportInjection;
+
+public abstract class BaseMvpFragment<P extends BaseContract.Presenter, VM extends BaseContract.ViewModel, VDB extends ViewDataBinding>
+        extends Fragment
+        implements BaseContract.View<P, VM> {
 
     protected P mPresenter;
     protected VM mViewModel;
     protected VDB mBinding;
 
     @Override
+    public void onAttach(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // Perform injection here for M (API 23) due to deprecation of onAttach(Activity).
+            AndroidSupportInjection.inject(this);
+        }
+        super.onAttach(context);
+    }
+
+    @Override
+    @Inject
     public void setPresenter(P presenter) {
         mPresenter = presenter;
     }
 
     @Override
+    @Inject
     public void setViewModel(VM viewModel) {
         mViewModel = viewModel;
     }
-
-    protected abstract VDB inflateDataBinding(LayoutInflater inflater, ViewGroup container);
 
     @Override
     public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +49,8 @@ public abstract class BaseMvpFragment<P extends BaseContract.Presenter, VM exten
         mBinding.executePendingBindings();
         return mBinding.getRoot();
     }
+
+    protected abstract VDB inflateDataBinding(LayoutInflater inflater, ViewGroup container);
 
     @Override
     public void onStart() {

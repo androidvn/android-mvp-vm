@@ -26,5 +26,6 @@ public interface BaseContract {
 
     interface ViewModel extends Observable {
 
+        void onPropertyChanged(int propertyId, Runnable action);
     }
 }

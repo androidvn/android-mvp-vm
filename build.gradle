@@ -45,5 +45,17 @@ dependencies {
 
     implementation project (':android-clean')
 
+    //Dagger
+    api "com.google.dagger:dagger:$rootProject.daggerVersion"
+    api "com.google.dagger:dagger-android-support:$rootProject.daggerVersion" // if you use the support libraries
+
+    //Dagger if JAVA
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+
+    //Dagger if kapt - KOTLIN
+//    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+//    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+
     testImplementation 'junit:junit:4.12'
 }
