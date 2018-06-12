@@ -4,12 +4,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.compileSdk
+    buildToolsVersion rootProject.ext.buildTools
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.targetSdk
         versionCode 1
         versionName "1.0"
 
@@ -44,19 +44,21 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    implementation project (':android-clean')
+    implementation "com.android.support:support-v4:$supportLibrary"
+
+    implementation project(':android-clean')
 
     //Dagger
-    api "com.google.dagger:dagger:$daggerVersion"
-    api "com.google.dagger:dagger-android-support:$daggerVersion" // if you use the support libraries
+    api "com.google.dagger:dagger:$dagger"
+    api "com.google.dagger:dagger-android-support:$dagger" // if you use the support libraries
 
     //Dagger if JAVA
-//    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
-//    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+//    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger"
+//    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
 
     //Dagger if kapt - KOTLIN
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
 
     testImplementation 'junit:junit:4.12'
 }
