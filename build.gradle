@@ -42,7 +42,7 @@ dependencies {
     })
 
     //Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinPlugin"
 
     implementation "com.android.support:support-v4:$supportLibrary"
 
