@@ -46,19 +46,18 @@ dependencies {
 
     implementation "com.android.support:support-v4:$supportLibrary"
 
-    implementation project(':android-clean')
-
     //Dagger
     api "com.google.dagger:dagger:$dagger"
     api "com.google.dagger:dagger-android-support:$dagger" // if you use the support libraries
 
-    //Dagger if JAVA
-//    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger"
-//    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
-
     //Dagger if kapt - KOTLIN
     kapt "com.google.dagger:dagger-android-processor:$dagger"
     kapt "com.google.dagger:dagger-compiler:$dagger"
+
+    // Java RX
+    implementation "io.reactivex.rxjava2:rxjava:$rx2java"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx2android"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rx2kotlin"
 
     testImplementation 'junit:junit:4.12'
 }
