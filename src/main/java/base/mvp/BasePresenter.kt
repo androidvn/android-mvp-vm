@@ -2,7 +2,7 @@ package base.mvp
 
 import android.util.Log
 
-abstract class BasePresenter<VM : BaseContract.ViewModel> (protected val mViewModel: VM) : BaseContract.Presenter {
+abstract class BasePresenter<VM : BaseContract.ViewModel> (protected val viewModel: VM) : BaseContract.Presenter {
 
     override fun start() {
         if (BuildConfig.DEBUG) {
@@ -28,6 +28,5 @@ abstract class BasePresenter<VM : BaseContract.ViewModel> (protected val mViewMo
         }
     }
 
-
-        private val TAG = javaClass.simpleName
+    private val TAG = javaClass.simpleName
 }

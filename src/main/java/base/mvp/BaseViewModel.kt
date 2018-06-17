@@ -6,7 +6,7 @@ import android.databinding.Observable
 import android.util.SparseArray
 import java.util.*
 
-open class BaseViewModel(protected val mContext: Context) : BaseObservable(), BaseContract.ViewModel {
+open class BaseViewModel(protected val context: Context) : BaseObservable(), BaseContract.ViewModel {
 
     private val mOnChangeObservers = SparseArray<MutableList<() -> Unit>>()
 
